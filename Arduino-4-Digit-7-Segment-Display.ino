@@ -14,11 +14,36 @@ int dpPin = 13;
 
 int DTime = 4;
 
+byte numbers[11][7] = {
+  {1,1,1,1,1,1,0}, //zero
+  {0,1,1,0,0,0,0}, //one
+  {1,1,0,1,1,0,1}, //two
+  {1,1,1,1,0,0,1}, //three
+  {0,1,1,0,0,1,1}, //four
+  {1,0,1,1,0,1,1}, //five
+  {1,0,1,1,1,1,1}, //six
+  {1,1,1,0,0,0,0}, //seven
+  {1,1,1,1,1,1,1}, //eight
+  {1,1,1,1,0,1,1}, //nine
+  {0,0,0,0,0,0,0}  //off
+};
+
+int mappingPin[7] = {
+  aPin,
+  bPin,
+  cPin,
+  dPin,
+  ePin,
+  fPin,
+  gPin
+};
+
 void setup() {
   pinMode(dig1, OUTPUT);
   pinMode(dig2, OUTPUT);
   pinMode(dig3, OUTPUT);
   pinMode(dig4, OUTPUT);
+  
   pinMode(aPin, OUTPUT);
   pinMode(bPin, OUTPUT);
   pinMode(cPin, OUTPUT);
@@ -30,30 +55,12 @@ void setup() {
 }
 
 void loop() {
-  clearScreen();
-  
-  digitalWrite(dig1, HIGH);  
-  displayNumber(1);
-  delay(DTime);
-  digitalWrite(dig1, LOW);
- 
-  digitalWrite(dig2, HIGH);  
-  displayNumber(2);
-  delay(DTime);
-  digitalWrite(dig2, LOW);
- 
-  digitalWrite(dig3, HIGH);  
-  displayNumber(3);
-  delay(DTime);
-  digitalWrite(dig3, LOW);
- 
-  digitalWrite(dig4, HIGH);  
-  displayNumber(4);
-  delay(DTime);
-  digitalWrite(dig4, LOW);
+  initDigits();
+
+  displayNumbers(1, 2, 3, 4);
 }
 
-void clearScreen() {
+void initDigits() {
   digitalWrite(dig1, LOW);
   digitalWrite(dig2, LOW);
   digitalWrite(dig3, LOW);
@@ -69,127 +76,22 @@ void clearScreen() {
   digitalWrite(dpPin, HIGH); 
 }
 
-void displayNumber(int x){
-   switch(x){
-     case 1: one(); break;
-     case 2: two(); break;
-     case 3: three(); break;
-     case 4: four(); break;
-     case 5: five(); break;
-     case 6: six(); break;
-     case 7: seven(); break;
-     case 8: eight(); break;
-     case 9: nine(); break;
-     default: zero(); break;
-   }
+void displayNumbers(int value1, int value2, int value3, int value4) {
+  displayNumber(dig1, value1);
+  displayNumber(dig2, value2);
+  displayNumber(dig3, value3);
+  displayNumber(dig4, value4);
 }
 
-void one()
-{
-  digitalWrite( aPin, HIGH);
-  digitalWrite( bPin, LOW);
-  digitalWrite( cPin, LOW);
-  digitalWrite( dPin, HIGH);
-  digitalWrite( ePin, HIGH);
-  digitalWrite( fPin, HIGH);
-  digitalWrite( gPin, HIGH);
-}
+void displayNumber(int digit, int value) {
+  digitalWrite(digit, HIGH);  
 
-void two()
-{
-  digitalWrite( aPin, LOW);
-  digitalWrite( bPin, LOW);
-  digitalWrite( cPin, HIGH);
-  digitalWrite( dPin, LOW);
-  digitalWrite( ePin, LOW);
-  digitalWrite( fPin, HIGH);
-  digitalWrite( gPin, LOW);
-}
+  for (int i = 0; i < 7; i++) {
+    if (numbers[value][i] == 1) {
+      digitalWrite(mappingPin[i], LOW); 
+    }
+  }
 
-void three()
-{
-  digitalWrite( aPin, LOW);
-  digitalWrite( bPin, LOW);
-  digitalWrite( cPin, LOW);
-  digitalWrite( dPin, LOW);
-  digitalWrite( ePin, HIGH);
-  digitalWrite( fPin, HIGH);
-  digitalWrite( gPin, LOW);
-}
-
-void four()
-{
-  digitalWrite( aPin, HIGH);
-  digitalWrite( bPin, LOW);
-  digitalWrite( cPin, LOW);
-  digitalWrite( dPin, HIGH);
-  digitalWrite( ePin, HIGH);
-  digitalWrite( fPin, LOW);
-  digitalWrite( gPin, LOW);
-}
-
-void five()
-{
-  digitalWrite( aPin, LOW);
-  digitalWrite( bPin, HIGH);
-  digitalWrite( cPin, LOW);
-  digitalWrite( dPin, LOW);
-  digitalWrite( ePin, HIGH);
-  digitalWrite( fPin, LOW);
-  digitalWrite( gPin, LOW);
-}
-
-void six()
-{
-  digitalWrite( aPin, LOW);
-  digitalWrite( bPin, HIGH);
-  digitalWrite( cPin, LOW);
-  digitalWrite( dPin, LOW);
-  digitalWrite( ePin, LOW);
-  digitalWrite( fPin, LOW);
-  digitalWrite( gPin, LOW);
-}
-
-void seven()
-{
-  digitalWrite( aPin, LOW);
-  digitalWrite( bPin, LOW);
-  digitalWrite( cPin, LOW);
-  digitalWrite( dPin, HIGH);
-  digitalWrite( ePin, HIGH);
-  digitalWrite( fPin, HIGH);
-  digitalWrite( gPin, HIGH);
-}
-
-void eight()
-{
-  digitalWrite( aPin, LOW);
-  digitalWrite( bPin, LOW);
-  digitalWrite( cPin, LOW);
-  digitalWrite( dPin, LOW);
-  digitalWrite( ePin, LOW);
-  digitalWrite( fPin, LOW);
-  digitalWrite( gPin, LOW);
-}
-
-void nine()
-{
-  digitalWrite( aPin, LOW);
-  digitalWrite( bPin, LOW);
-  digitalWrite( cPin, LOW);
-  digitalWrite( dPin, LOW);
-  digitalWrite( ePin, HIGH);
-  digitalWrite( fPin, LOW);
-  digitalWrite( gPin, LOW);
-}
-
-void zero()
-{
-  digitalWrite( aPin, LOW);
-  digitalWrite( bPin, LOW);
-  digitalWrite( cPin, LOW);
-  digitalWrite( dPin, LOW);
-  digitalWrite( ePin, LOW);
-  digitalWrite( fPin, LOW);
-  digitalWrite( gPin, HIGH);
+  delay(DTime);
+  initDigits();
 }
