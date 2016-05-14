@@ -1,20 +1,20 @@
-int dig1 = 2;
-int dig2 = 3;
-int dig3 = 4;
-int dig4 = 5;
+const int dig1 = 2;
+const int dig2 = 3;
+const int dig3 = 4;
+const int dig4 = 5;
 
-int aPin = 6;
-int bPin = 7;
-int cPin = 8;
-int dPin = 9;
-int ePin = 10;
-int fPin = 11;
-int gPin = 12;
-int dpPin = 13;
+const int aPin = 6;
+const int bPin = 7;
+const int cPin = 8;
+const int dPin = 9;
+const int ePin = 10;
+const int fPin = 11;
+const int gPin = 12;
+const int dpPin = 13;
 
-int DTime = 4;
+const int DTime = 4;
 
-byte numbers[11][7] = {
+const byte numbers[11][7] = {
   {1,1,1,1,1,1,0}, //zero
   {0,1,1,0,0,0,0}, //one
   {1,1,0,1,1,0,1}, //two
@@ -28,7 +28,7 @@ byte numbers[11][7] = {
   {0,0,0,0,0,0,0}  //off
 };
 
-int mappingPin[7] = {
+const int mappingPin[7] = {
   aPin,
   bPin,
   cPin,
