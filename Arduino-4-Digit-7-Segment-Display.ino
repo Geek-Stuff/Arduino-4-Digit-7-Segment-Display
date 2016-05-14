@@ -30,20 +30,8 @@ void setup() {
 }
 
 void loop() {
-  digitalWrite(dig1, LOW);
-  digitalWrite(dig2, LOW);
-  digitalWrite(dig3, LOW);
-  digitalWrite(dig4, LOW); 
-
-  digitalWrite(aPin, HIGH); 
-  digitalWrite(bPin, HIGH); 
-  digitalWrite(cPin, HIGH); 
-  digitalWrite(dPin, HIGH); 
-  digitalWrite(ePin, HIGH); 
-  digitalWrite(fPin, HIGH); 
-  digitalWrite(gPin, HIGH); 
-  digitalWrite(dpPin, HIGH); 
- 
+  clearScreen();
+  
   digitalWrite(dig1, HIGH);  
   displayNumber(1);
   delay(DTime);
@@ -63,6 +51,22 @@ void loop() {
   displayNumber(4);
   delay(DTime);
   digitalWrite(dig4, LOW);
+}
+
+void clearScreen() {
+  digitalWrite(dig1, LOW);
+  digitalWrite(dig2, LOW);
+  digitalWrite(dig3, LOW);
+  digitalWrite(dig4, LOW); 
+
+  digitalWrite(aPin, HIGH); 
+  digitalWrite(bPin, HIGH); 
+  digitalWrite(cPin, HIGH); 
+  digitalWrite(dPin, HIGH); 
+  digitalWrite(ePin, HIGH); 
+  digitalWrite(fPin, HIGH); 
+  digitalWrite(gPin, HIGH); 
+  digitalWrite(dpPin, HIGH); 
 }
 
 void displayNumber(int x){
